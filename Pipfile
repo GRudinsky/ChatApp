@@ -11,6 +11,7 @@ django = "*"
 psycopg2-binary = "*"
 djangorestframework = "*"
 channels = "*"
+channels-redis = "*"
 
 [requires]
 python_version = "3.7"
