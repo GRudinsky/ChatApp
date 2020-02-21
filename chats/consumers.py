@@ -1,4 +1,5 @@
 from channels.generic.websocket import AsyncWebsocketConsumer
+from .helpers import get_translation
 import json
 
 class ChatConsumer(AsyncWebsocketConsumer):
@@ -24,7 +25,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
     # Receive message from WebSocket
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
-        message = text_data_json['message']
+        translated_message = get_translation(text_data_json['message'], 'en')
+        message = translated_message
+        # text_data_json = json.loads(translated_message)
+        # message = text_data_json['message']
+      
 
         # Send message to room group
         await self.channel_layer.group_send(
